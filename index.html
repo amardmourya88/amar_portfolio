@@ -21,25 +21,17 @@
   --good:#0E8A55; --bad:#D6361F; --shadow:rgba(13,21,48,.35);
   --slab:#C4CCE0; --hl:rgba(255,255,255,.9); --glare:rgba(39,72,240,.09); --glow:rgba(39,72,240,.35);
   --aura:rgba(39,72,240,.10); --grid:rgba(13,21,48,.045); --spotc:rgba(39,72,240,.10);
-  --lift:inset 0 1px 0 var(--hl),0 5px 0 -1px var(--slab);
+  --lift:inset 0 1px 0 var(--hl),0 10px 24px -18px var(--shadow);
   --font-display:'Bricolage Grotesque','Segoe UI',system-ui,sans-serif;
   --font-body:'Hanken Grotesk','Segoe UI',system-ui,sans-serif;
   --font-mono:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;
 }
-@media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]){
-    --bg:#070B16; --surface:#101833; --surface-2:#18224A; --fg:#F2F5FF; --muted:#B4BEDB; --line:#2B3868;
-    --accent:#8CA2FF; --accent-fg:#06091A; --mark:rgba(255,210,63,.34); --good:#47E39A; --bad:#FF8570; --shadow:rgba(0,0,0,.7);
-    --slab:#03050C; --hl:rgba(255,255,255,.07); --glare:rgba(140,162,255,.16); --glow:rgba(140,162,255,.45);
-    --aura:rgba(88,112,255,.22); --grid:rgba(160,180,255,.05); --spotc:rgba(140,162,255,.16);
-    color-scheme:dark;
-  }
-}
+/* Light is the default for every viewer. Dark applies only when the toggle (or the host) sets data-theme="dark". */
 :root[data-theme="dark"]{
   --bg:#070B16; --surface:#101833; --surface-2:#18224A; --fg:#F2F5FF; --muted:#B4BEDB; --line:#2B3868;
   --accent:#8CA2FF; --accent-fg:#06091A; --mark:rgba(255,210,63,.34); --good:#47E39A; --bad:#FF8570; --shadow:rgba(0,0,0,.7);
   --slab:#03050C; --hl:rgba(255,255,255,.07); --glare:rgba(140,162,255,.16); --glow:rgba(140,162,255,.45);
-  --aura:rgba(88,112,255,.22); --grid:rgba(160,180,255,.05); --spotc:rgba(140,162,255,.16);
+  --aura:rgba(88,112,255,.14); --grid:rgba(160,180,255,.045); --spotc:rgba(140,162,255,.14);
   color-scheme:dark;
 }
 
@@ -47,7 +39,7 @@
 html{scroll-behavior:smooth}
 body{
   background-color:var(--bg); color:var(--fg);
-  background-image:radial-gradient(70% 45% at 85% -5%,var(--aura),transparent 70%),linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-image:radial-gradient(60% 40% at 50% -8%,var(--aura),transparent 70%),linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
   background-size:auto,44px 44px,44px 44px;
   font:400 16px/1.6 var(--font-body);
   padding-left:max(16px,env(safe-area-inset-left,0px));
@@ -72,7 +64,8 @@ section{scroll-margin-top:80px}
 .tilt:hover{box-shadow:var(--lift),0 18px 36px -16px var(--glow)}
 
 /* header */
-.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--bg) 90%,transparent);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:12px;border-bottom:1px solid var(--line)}
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;margin-left:calc(-1*max(16px,env(safe-area-inset-left,0px)));margin-right:calc(-1*max(16px,env(safe-area-inset-right,0px)));padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));background:color-mix(in srgb,var(--bg) 92%,transparent);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.hd{max-width:1120px;margin-inline:auto;display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:12px}
 .brand{display:flex;align-items:center;gap:10px;text-decoration:none;font:700 1.05rem var(--font-display)}
 .logo{width:34px;height:34px;border-radius:8px;background:var(--accent);color:var(--accent-fg);display:grid;place-items:center;font:800 .85rem var(--font-display);letter-spacing:.02em;box-shadow:0 3px 0 color-mix(in srgb,var(--accent) 55%,#000)}
 .nav{display:flex;align-items:center;gap:6px}
@@ -86,7 +79,7 @@ section{scroll-margin-top:80px}
 /* hero */
 .hero{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center;padding-block:64px 48px;overflow-x:clip}
 .kicker{font:500 .75rem/1.3 var(--font-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
-.hero h1{font-size:clamp(2.4rem,5.6vw,4.3rem);line-height:1.04;letter-spacing:-.03em;font-weight:800;margin-block:16px 20px;perspective:700px}
+.hero h1{font-size:clamp(2.4rem,5.6vw,4.3rem);line-height:1.04;letter-spacing:-.02em;word-spacing:.08em;font-weight:800;margin-block:16px 20px;perspective:700px}
 .mark{background:linear-gradient(transparent 60%,var(--mark) 60% 92%,transparent 92%);padding-inline:2px}
 .flip{display:inline-block;transform-origin:50% 70%;transition:transform .3s ease,opacity .3s ease}
 .flip.out{transform:rotateX(90deg);opacity:0}
@@ -104,7 +97,7 @@ section{scroll-margin-top:80px}
 
 .stage{position:relative;perspective:1100px;padding:20px 8px}
 .stage3d{position:relative;transform-style:preserve-3d;transform:rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .25s ease-out}
-.serp{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:22px;box-shadow:0 30px 60px -28px var(--shadow),0 8px 0 -2px var(--slab),inset 0 1px 0 var(--hl)}
+.serp{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:22px;box-shadow:0 30px 60px -30px var(--shadow),inset 0 1px 0 var(--hl)}
 .fl{position:absolute;transform:translateZ(80px);padding:7px 12px;border-radius:999px;background:var(--hi);color:var(--hi-fg);font:500 .76rem/1 var(--font-mono);box-shadow:0 12px 20px -10px var(--shadow);animation:bob 5s ease-in-out infinite;pointer-events:none;white-space:nowrap}
 .fl.b{background:var(--accent);color:var(--accent-fg);animation-delay:-1.4s}
 .fl.c{background:var(--surface);color:var(--fg);border:1px solid var(--line);animation-delay:-2.6s}
@@ -250,7 +243,7 @@ section{scroll-margin-top:80px}
 .legend i{flex:none;width:14px;height:14px;border-radius:50%;background:var(--good)}
 .legend i.coin{border-radius:4px;background:var(--hi)}
 .legend i.wall{border-radius:3px;background:var(--bad)}
-.board{position:relative;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--surface-2);box-shadow:0 8px 0 -2px var(--slab),inset 0 1px 0 var(--hl)}
+.board{position:relative;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--surface-2);box-shadow:0 14px 30px -20px var(--shadow),inset 0 1px 0 var(--hl)}
 .board canvas{display:block;width:100%;height:auto;aspect-ratio:1;touch-action:none}
 .ov{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:10px;padding:24px;background:color-mix(in srgb,var(--surface) 90%,transparent)}
 .ov h3{font-size:1.6rem;font-weight:800}
@@ -262,7 +255,7 @@ section{scroll-margin-top:80px}
 @media (pointer:coarse){.pad{display:grid}}
 
 /* contact */
-.contact{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:clamp(24px,5vw,48px);display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:32px;align-items:center;box-shadow:0 8px 0 -2px var(--slab),inset 0 1px 0 var(--hl)}
+.contact{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:clamp(24px,5vw,48px);display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:32px;align-items:center;box-shadow:0 14px 30px -20px var(--shadow),inset 0 1px 0 var(--hl)}
 .contact h2{font-size:clamp(1.8rem,3.8vw,2.8rem);line-height:1.08;letter-spacing:-.025em;font-weight:800}
 .contact p{color:var(--muted);margin-top:14px}
 .ways{display:grid;gap:12px}
@@ -304,7 +297,7 @@ footer{margin-top:40px;padding-top:20px;border-top:1px solid var(--line);display
 .rg{--s:54px;width:var(--s);height:var(--s);border:2.5px solid var(--hi);border-radius:50%;animation:ring3d 9s linear infinite;opacity:.8}
 .rg.b{border-color:var(--accent);opacity:.55}
 @keyframes ring3d{from{transform:rotate3d(1,1,0,0deg)}to{transform:rotate3d(1,1,0,360deg)}}
-.hero h1{text-shadow:calc(var(--sx,1)*1px) calc(var(--sy,1.5)*1px) 0 color-mix(in srgb,var(--accent) 26%,transparent),calc(var(--sx,1)*2px) calc(var(--sy,1.5)*2px) 0 color-mix(in srgb,var(--accent) 18%,transparent),calc(var(--sx,1)*3px) calc(var(--sy,1.5)*3px) 0 color-mix(in srgb,var(--accent) 11%,transparent)}
+.hero h1{text-shadow:calc(var(--sx,1)*1px) calc(var(--sy,1.5)*1px) 0 color-mix(in srgb,var(--accent) 15%,transparent),calc(var(--sx,1)*2px) calc(var(--sy,1.5)*2px) 0 color-mix(in srgb,var(--accent) 8%,transparent)}
 
 @media (max-width:900px){
   .hero{grid-template-columns:minmax(0,1fr);gap:36px;padding-block:40px 32px}
@@ -341,8 +334,7 @@ footer{margin-top:40px;padding-top:20px;border-top:1px solid var(--line);display
 <div class="spot" id="spot" aria-hidden="true"></div>
 <div class="cur-ring" id="curRing" aria-hidden="true"><div class="cur-3d" id="cur3d"><span id="curLabel"></span></div></div>
 <div class="cur-dot" id="curDot" aria-hidden="true"></div>
-<div class="wrap">
-  <header class="top">
+<header class="top"><div class="hd">
     <a class="brand" href="#top" aria-label="Amar Singh, back to top"><span class="logo">AS</span><span>Amar Singh</span></a>
     <nav class="nav" aria-label="Main">
       <a class="opt" href="#experience">Experience</a>
@@ -353,8 +345,9 @@ footer{margin-top:40px;padding-top:20px;border-top:1px solid var(--line);display
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 0 0 18z" fill="currentColor"/></svg>
       </button>
     </nav>
-  </header>
+  </div></header>
 
+<div class="wrap">
   <main id="top">
     <section class="hero" aria-label="Introduction">
       <div class="shapes" aria-hidden="true">
@@ -377,9 +370,9 @@ footer{margin-top:40px;padding-top:20px;border-top:1px solid var(--line);display
       <div class="stage" id="stage">
         <div class="stage3d" id="stage3d">
           <span class="fl" style="top:-14px;right:14px" aria-hidden="true">SEO</span>
-          <span class="fl b" style="top:42%;left:-10px" aria-hidden="true">Meta Ads</span>
+          <span class="fl b" style="top:-14px;left:24px" aria-hidden="true">Meta Ads</span>
           <span class="fl c" style="bottom:-10px;left:22px" aria-hidden="true">Google Ads</span>
-          <span class="fl d" style="bottom:26px;right:-8px" aria-hidden="true">WhatsApp API</span>
+          <span class="fl d" style="bottom:-10px;right:24px" aria-hidden="true">WhatsApp API</span>
           <div class="serp" aria-label="Search result style summary">
             <div class="query">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
@@ -668,13 +661,13 @@ footer{margin-top:40px;padding-top:20px;border-top:1px solid var(--line);display
 (function(){
   var root=document.documentElement;
   var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  try{var s=localStorage.getItem('as-theme'); if(s==='light'||s==='dark'){root.dataset.theme=s}}catch(e){}
+  try{var s=localStorage.getItem('as-theme-v2'); if(s==='dark'){root.dataset.theme=s}}catch(e){}
 
   /* theme toggle */
   document.getElementById('themeBtn').addEventListener('click',function(){
-    var dark=root.dataset.theme?root.dataset.theme==='dark':window.matchMedia('(prefers-color-scheme: dark)').matches;
+    var dark=root.dataset.theme==='dark';
     var next=dark?'light':'dark'; root.dataset.theme=next;
-    try{localStorage.setItem('as-theme',next)}catch(e){}
+    try{localStorage.setItem('as-theme-v2',next)}catch(e){}
     if(window.__redraw)window.__redraw();
   });
   window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change',function(){if(window.__redraw)window.__redraw()});
