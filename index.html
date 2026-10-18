@@ -26,8 +26,8 @@
   --font-body:'Hanken Grotesk','Segoe UI',system-ui,sans-serif;
   --font-mono:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;
 }
-/* Light is the default for every viewer. Dark applies only when the toggle (or the host) sets data-theme="dark". */
-:root[data-theme="dark"]{
+/* Light is the default for every viewer, whatever their app or device theme is. Dark applies only when this page's own toggle sets data-mode="dark". */
+:root[data-mode="dark"]{
   --bg:#070B16; --surface:#101833; --surface-2:#18224A; --fg:#F2F5FF; --muted:#B4BEDB; --line:#2B3868;
   --accent:#8CA2FF; --accent-fg:#06091A; --mark:rgba(255,210,63,.34); --good:#47E39A; --bad:#FF8570; --shadow:rgba(0,0,0,.7);
   --slab:#03050C; --hl:rgba(255,255,255,.07); --glare:rgba(140,162,255,.16); --glow:rgba(140,162,255,.45);
@@ -297,7 +297,7 @@ footer{margin-top:40px;padding-top:20px;border-top:1px solid var(--line);display
 .rg{--s:54px;width:var(--s);height:var(--s);border:2.5px solid var(--hi);border-radius:50%;animation:ring3d 9s linear infinite;opacity:.8}
 .rg.b{border-color:var(--accent);opacity:.55}
 @keyframes ring3d{from{transform:rotate3d(1,1,0,0deg)}to{transform:rotate3d(1,1,0,360deg)}}
-.hero h1{text-shadow:calc(var(--sx,1)*1px) calc(var(--sy,1.5)*1px) 0 color-mix(in srgb,var(--accent) 15%,transparent),calc(var(--sx,1)*2px) calc(var(--sy,1.5)*2px) 0 color-mix(in srgb,var(--accent) 8%,transparent)}
+.hero h1{text-shadow:calc(var(--sx,1)*.5px) calc(var(--sy,1.5)*.5px) 0 color-mix(in srgb,var(--accent) 16%,transparent)}
 
 @media (max-width:900px){
   .hero{grid-template-columns:minmax(0,1fr);gap:36px;padding-block:40px 32px}
@@ -316,7 +316,9 @@ footer{margin-top:40px;padding-top:20px;border-top:1px solid var(--line);display
   .sec{padding-block:48px 4px}
   .res-title{font-size:1.15rem}
   .why .big{font-size:2.6rem}
-  .par.hide-sm{display:none}
+  .shapes{display:none}
+  .kicker{font-size:.68rem;letter-spacing:.08em}
+  .hero{padding-block:32px 28px}
 }
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
@@ -351,7 +353,7 @@ footer{margin-top:40px;padding-top:20px;border-top:1px solid var(--line);display
   <main id="top">
     <section class="hero" aria-label="Introduction">
       <div class="shapes" aria-hidden="true">
-        <div class="par" data-depth="1.6" style="left:0;top:8px"><div class="mc" style="--s:38px"><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+        <div class="par" data-depth="1.6" style="left:0;top:20px"><div class="mc" style="--s:38px"><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
         <div class="par hide-sm" data-depth="-1.2" style="left:47%;top:12px"><div class="rg" style="--s:54px"></div></div>
         <div class="par hide-sm" data-depth="2.2" style="left:41%;bottom:10px"><div class="mc" style="--s:26px;animation-duration:10s"><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
         <div class="par" data-depth="-1.8" style="right:0;bottom:2px"><div class="rg b" style="--s:70px;animation-duration:12s"></div></div>
@@ -661,12 +663,12 @@ footer{margin-top:40px;padding-top:20px;border-top:1px solid var(--line);display
 (function(){
   var root=document.documentElement;
   var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  try{var s=localStorage.getItem('as-theme-v2'); if(s==='dark'){root.dataset.theme=s}}catch(e){}
+  try{var s=localStorage.getItem('as-theme-v2'); if(s==='dark'){root.dataset.mode=s}}catch(e){}
 
   /* theme toggle */
   document.getElementById('themeBtn').addEventListener('click',function(){
-    var dark=root.dataset.theme==='dark';
-    var next=dark?'light':'dark'; root.dataset.theme=next;
+    var dark=root.dataset.mode==='dark';
+    var next=dark?'light':'dark'; root.dataset.mode=next;
     try{localStorage.setItem('as-theme-v2',next)}catch(e){}
     if(window.__redraw)window.__redraw();
   });
